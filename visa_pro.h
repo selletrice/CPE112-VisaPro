@@ -5,6 +5,7 @@
 
 // Node for Student Profile and Hashing
 struct stageNode{
+    char stageName[MAX];
     struct stageNode *next;
 };
 
@@ -28,7 +29,6 @@ struct student{
 
     struct student *next; // Chaining for Hash Table
 };
-
 
 
 #endif
