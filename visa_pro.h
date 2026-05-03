@@ -25,6 +25,10 @@ struct student{
 
     struct stageNode *currentStage; // Member 1: Points to current Linked List node
     struct docNode *docTreeRoot; // Member 2: Points to root of Document Tree
+
+    struct student *next; // Chaining for Hash Table
 };
+
+
 
 #endif
