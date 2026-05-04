@@ -30,7 +30,7 @@ void initVisaRoadmap(){
 
 void startVisaProcess(struct student *s){
     if (headStage == NULL){
-        initVisaRoadmap;
+        initVisaRoadmap();
     }
 
     if (s != NULL){
@@ -53,7 +53,7 @@ void renewVisaProcess(struct student *s, char* newExpiry){
 void moveToNextStage(struct student *s){
     if (s == NULL || s->currentStage == NULL){
         printf("Error: Student process has not initialized\n");
-        return 0;
+        return;
     }
 
     if (s->currentStage->next != NULL){
