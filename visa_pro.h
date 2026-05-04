@@ -30,5 +30,18 @@ struct student{
     struct student *next; // Chaining for Hash Table
 };
 
+// Member 1: From student_db.c
+void initTable();
+void insertStudent(long long id, char* name);
+struct student* searchStudent(long long id);
+
+// Member 1: From process_manager.c
+void initVisaRoadmap();
+void startVisaProcess(struct student *s);
+void moveToNextStage(struct student *s);
+void renewVisaProcess(struct student *s, char* newExpiry);
+
+// Future Functions from other members should be included below
+
 
 #endif
