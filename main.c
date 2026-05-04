@@ -29,7 +29,7 @@ int main(){
             insertStudent(id, name);
 
             struct student *newStudent = searchStudent(id);
-            if (newStudent == NULL){
+            if (newStudent != NULL){
                 startVisaProcess(newStudent);
             }
             break;
@@ -39,7 +39,7 @@ int main(){
             scanf("%lld", &id);
             struct student *s = searchStudent(id);
             if (s != NULL && s->currentStage != NULL){
-                printf("Student: %s\n", name);
+                printf("Student: %s\n", s->name);
                 printf("Current Status: %s\n", s->currentStage->stageName);
             } else{
                 printf("Student not found or no process started.");
