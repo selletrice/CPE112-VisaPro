@@ -28,6 +28,17 @@ void initVisaRoadmap(){
     headStage = s1;
 }
 
+void startVisaProcess(struct student *s){
+    if (headStage == NULL){
+        initVisaRoadmap;
+    }
+
+    if (s != NULL){
+        s->currentStage = headStage;
+        printf("Process Started: %s is now at [%s]\n", s->name, s->currentStage->stageName);
+    }
+}
+
 void renewVisaProcess(struct student *s, char* newExpiry){
     // Update the pointer to point back to the beginning, thus resetting the process
     strncpy(s->visaExpiry, newExpiry, 20);
@@ -37,5 +48,19 @@ void renewVisaProcess(struct student *s, char* newExpiry){
     // Member 3 Task: Update their 90-day reminder Priority Queue
 
     printf("Visa Renewed for %s. New Expiry: %s. Process restarted.\n", s->name, s->visaExpiry);
+}
 
+void moveToNextStage(struct student *s){
+    if (s == NULL || s->currentStage == NULL){
+        printf("Error: Student process has not initialized\n");
+        return 0;
+    }
+
+    if (s->currentStage->next != NULL){
+        s->currentStage = s->currentStage->next;
+        printf("SUCCESS! %s moved to stage: %s", s->name, s->currentStage->stageName);
+    }
+    else{
+        printf("PROCESS COMPLETE! %s has already reached the final stage %s", s->name, s->currentStage->stageName);
+    }
 }
