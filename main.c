@@ -49,7 +49,7 @@ int main(){
                 printf("Student not found or no process started.");
             }
             break;
-        // Move stage forward by moving pointer to next
+        // Move stage forward by moving pointer to next after checking all documents 
         case 3:
             printf("Enter Student ID to update progress: ");
             scanf("%lld", &id);
