@@ -45,6 +45,11 @@ void renewVisaProcess(struct student *s, char* newExpiry){
     s->currentStage = headStage; // Reset the Linked List pointer to Stage 1
 
     // Member 2 Task: Call a function here to clear their Document Tree
+    if (s->docTreeRoot != NULL)
+    {
+        clearDocumentTree(s->docTreeRoot);
+    }
+
     // Member 3 Task: Update their 90-day reminder Priority Queue
 
     printf("Visa Renewed for %s. New Expiry: %s. Process restarted.\n", s->name, s->visaExpiry);
