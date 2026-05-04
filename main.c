@@ -27,18 +27,38 @@ int main(){
             printf("Enter Name: ");
             scanf("%s", name);
             insertStudent(id, name);
+
+            struct student *newStudent = searchStudent(id);
+            if (newStudent == NULL){
+                startVisaProcess(newStudent);
+            }
             break;
         // Search and print current stage
         case 2:
-            // Insert code here later
+            printf("Enter Student ID to check current progress: ");
+            scanf("%lld", &id);
+            struct student *s = searchStudent(id);
+            if (s != NULL && s->currentStage != NULL){
+                printf("Student: %s\n", name);
+                printf("Current Status: %s\n", s->currentStage->stageName);
+            } else{
+                printf("Student not found or no process started.");
+            }
             break;
         // Move stage forward by moving pointer to next
         case 3:
-            // Insert code here later
+            printf("Enter Student ID to update progress: ");
+            scanf("%lld", &id);
+            struct student *updateStage = searchStudent(id);
+            if (updateStage != NULL){
+                moveToNextStage(updateStage);
+            } else{
+                printf("Student not found.\n");
+            }
             break;
         // Visa Renewal
         case 4:
-            // Insert code here later
+            // For Member 3
             break;
         case 5:
            return 0;
