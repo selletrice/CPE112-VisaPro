@@ -38,6 +38,9 @@ void insertStudent(long long id, char* name){
     newStudent->next = hashTable[index];
     hashTable[index] = newStudent;
 
+    //member 2 addition: create a document tree after student creates an account
+    newStudent->docTreeRoot = docTree();
+
     printf("SUCCESS: Student [%lld] added to Index %d\n", id, index);
 }
 

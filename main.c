@@ -41,19 +41,31 @@ int main(){
             if (s != NULL && s->currentStage != NULL){
                 printf("Student: %s\n", s->name);
                 printf("Current Status: %s\n", s->currentStage->stageName);
+
+                //member 2 addition: document checklist
+                printf("\n ----- Document Checklist -----\n");
+                documentChecklist(s->docTreeRoot);
             } else{
                 printf("Student not found or no process started.");
             }
             break;
-        // Move stage forward by moving pointer to next
+        // Move stage forward by moving pointer to next after checking all documents 
         case 3:
             printf("Enter Student ID to update progress: ");
             scanf("%lld", &id);
             struct student *updateStage = searchStudent(id);
-            if (updateStage != NULL){
-                moveToNextStage(updateStage);
-            } else{
-                printf("Student not found.\n");
+            if (updateStage != NULL)
+            {
+                //member 2 addition: only allow moving past document collection if tree is complete
+               if (strcmp(updateStage->currentStage->stageName, "Document Collection") == 0){
+                if (isTreeComplete(updateStage->docTreeRoot)) {
+                    moveToNextStage(updateStage);
+                } else {
+                    printf("DENIED: You must collect all documents before visiting Immigration.\n");
+                }
+                } else {
+                    printf("Student not found.\n");
+                }
             }
             break;
         // Visa Renewal

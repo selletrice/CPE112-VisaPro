@@ -26,6 +26,7 @@ struct student{
 
     struct stageNode *currentStage; // Member 1: Points to current Linked List node
     struct docNode *docTreeRoot; // Member 2: Points to root of Document Tree
+    struct docNode *report90TreeRoot; //For 90-Day Reporting
 
     struct student *next; // Chaining for Hash Table
 };
@@ -40,6 +41,15 @@ void initVisaRoadmap();
 void startVisaProcess(struct student *s);
 void moveToNextStage(struct student *s);
 void renewVisaProcess(struct student *s, char* newExpiry);
+
+//Member 2: From document_logic.c
+struct docNode *createDocumentNode(char document[]);
+struct docNode *docTree();
+void documentChecklist(struct docNode *root);;
+int isTreeComplete(struct docNode *root);
+void clearDocumentTree(struct docNode *root);
+void deleteDocumentTree(struct docNode *root);
+
 
 // Future Functions from other members should be included below
 
