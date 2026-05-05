@@ -25,7 +25,11 @@ struct student{
     char report90DayDeadline[20]; // 90-Day Timer
 
     struct stageNode *currentStage; // Member 1: Points to current Linked List node
+    struct stageNode *current90DaysStage; 
+
     struct docNode *docTreeRoot; // Member 2: Points to root of Document Tree
+    struct docNode *doc90DaysTreeRoot;
+
     struct docNode *report90TreeRoot; //For 90-Day Reporting
 
     struct student *next; // Chaining for Hash Table
@@ -37,10 +41,17 @@ void insertStudent(long long id, char* name);
 struct student* searchStudent(long long id);
 
 // Member 1: From process_manager.c
+
+// Visa 
 void initVisaRoadmap();
 void startVisaProcess(struct student *s);
 void moveToNextStage(struct student *s);
 void renewVisaProcess(struct student *s, char* newExpiry);
+
+// 90-Days
+void init90DaysRoadmap();
+void start90DaysProcess(struct student *s);
+void move90DaysNextStage(struct student *s);
 
 //Member 2: From document_logic.c
 struct docNode *createDocumentNode(char document[]);
