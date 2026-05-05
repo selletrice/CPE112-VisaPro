@@ -102,6 +102,14 @@ void documentChecklist(struct docNode *root)
     }
 }
 
+struct docNode *docTree90 ()
+{
+    struct docNode *root = createDocumentNode("TM. 47 (Notification for staying longer than 90 days)");
+    root->left = createDocumentNode("TM. 30 Notification");
+    root->right = createDocumentNode("Original Passport");
+}
+
+
 //final verification: returns 1 only if the entire tree is succesfully collected
 int isTreeComplete(struct docNode *root)
 {
