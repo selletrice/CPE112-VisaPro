@@ -22,18 +22,48 @@ struct docNode *createDocumentNode (char document[])
 //tree architecture
 struct docNode *docTree()
 {
+    //final goal
     struct docNode *root = createDocumentNode("Visa Support Letter");
 
-    //Registrar Branch 
-    root->left = createDocumentNode("Registrar's Office Documents");
-    root->left->left = createDocumentNode("Transcript");
-    root->left->right = createDocumentNode("Certificate of student Status");
+    //documents required to request for visa support letter:
+   //branch 1: documents to prepare by yourself
+   struct docNode *selfPrep = createDocumentNode("Self-Prepared Documents");
+   root->left = selfPrep;
 
-    //IA Branch
-    root->right = createDocumentNode("IA Documents");
-    root->right->left = createDocumentNode("Certified Request Letter");
+   //sub-branch for identity and fees
+   struct docNode *identity = createDocumentNode("Identity and Fees");
+   selfPrep->right = identity;
+   identity->left = createDocumentNode("Original Passport");
+   identity->left->left = createDocumentNode("Passport Copies (Bio/Visa/Last Arrival Stamp)");
 
-    //more nodes/documents to add later
+   //sub-branch for forms
+   selfPrep->left = createDocumentNode("Forms");
+   selfPrep->left->left = createDocumentNode("Immigration Form 7 (TM.7)");
+   selfPrep->left->right = createDocumentNode("Overstay Penalty Form");
+   selfPrep->left->left->left = createDocumentNode("TM.30 Notification");
+
+   struct docNode *miscellenous = createDocumentNode("Photos and Fees");
+   identity->right = miscellenous;
+   miscellenous->left = createDocumentNode("Photos(4 x 6 cm)");
+   miscellenous->right = createDocumentNode("Application Fee (1,900 Baht)");
+
+   //branch 2: Office Documents (IA and RO)
+   struct docNode *officeDocs = createDocumentNode("University Office Documents");
+   root->right = officeDocs;
+
+   //IA office branch
+   officeDocs->left = createDocumentNode("IA Office (2nd Floor N2)");
+   officeDocs->left->left = createDocumentNode("Certified KMUTT Request Letter");
+   
+   //registrar's office (RO) branch
+   struct docNode *roOffice = createDocumentNode("Registrar's Office (THE HUB)");
+   officeDocs->right = roOffice;
+   roOffice->left = createDocumentNode("Transcript or E-Transcript");
+
+   struct docNode *roMisc = createDocumentNode("Enrollment and Status");
+   roOffice->right = roMisc;
+   roMisc->left = createDocumentNode("Tution Fee Receipt");
+   roMisc->right = createDocumentNode("Certificate of student status");
 
     return root;
 }
@@ -56,9 +86,9 @@ void documentChecklist(struct docNode *root)
     //parent node
     else 
     {
+        //automatically calculate status based on children
         if (root->left != NULL && root->right != NULL)
         {
-            //checks if sub-requirements are obtained
             root->isCollected = (root->left->isCollected && root->right->isCollected);
         } 
         else if (root->left != NULL)
