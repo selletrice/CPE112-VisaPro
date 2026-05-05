@@ -132,3 +132,16 @@ void clearDocumentTree(struct docNode *root)
     //reset document collection status to 0 (not collected)
     root->isCollected = 0;
 }
+
+//to avoid memory leak
+void deleteDocumentTree(struct docNode *root)
+{
+    if (root == NULL) 
+    return;
+
+    //post-order transversal
+    deleteDocumentTree(root->left);
+    deleteDocumentTree(root->right);
+
+    free(root);
+}
