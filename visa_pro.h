@@ -3,6 +3,14 @@
 
 #define MAX 100
 
+void displayHeader() {
+    printf("\n******************************************\n");
+    printf("*              VISAPRO                   *\n");
+    printf("*    VISA & 90-DAY TRACKING SYSTEM       *\n");
+    printf("*    Computer Engineering Project        *\n");
+    printf("******************************************\n");
+}
+
 // Node for Student Profile and Hashing
 struct stageNode{
     char stageName[MAX];
@@ -36,6 +44,9 @@ struct student{
 };
 
 // Member 1: From student_db.c
+
+void displayHeader();
+
 void initTable();
 void insertStudent(long long id, char* name);
 struct student* searchStudent(long long id);
