@@ -107,6 +107,7 @@ struct docNode *docTree90 ()
     struct docNode *root = createDocumentNode("TM. 47 (Notification for staying longer than 90 days)");
     root->left = createDocumentNode("TM. 30 Notification");
     root->right = createDocumentNode("Original Passport");
+    return root;
 }
 
 
