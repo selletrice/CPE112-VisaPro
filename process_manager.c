@@ -11,18 +11,22 @@ void initVisaRoadmap(){
     struct stageNode *s2 = (struct stageNode*)malloc(sizeof(struct stageNode));
     struct stageNode *s3 = (struct stageNode*)malloc(sizeof(struct stageNode));
     struct stageNode *s4 = (struct stageNode*)malloc(sizeof(struct stageNode));
+    struct stageNode *s5 = (struct stageNode*)malloc(sizeof(struct stageNode));
+
 
     // Name the stages
     strcpy(s1->stageName, "Student Profile Registration");
     strcpy(s2->stageName, "Document Collection");
     strcpy(s3->stageName, "Immigration Visit");
-    strcpy(s4->stageName, "Visa Issued");
+    strcpy(s4->stageName, "Visa Processing");
+    strcpy(s5->stageName, "Visa Issued");
 
     // Link stages together
     s1->next = s2;
     s2->next = s3;
     s3->next = s4;
-    s4->next = NULL;
+    s4->next = s5;
+    s5->next = NULL;
 
     // Set stage 1 as the head (very first) stage
     headStage = s1;
@@ -57,7 +61,7 @@ void renewVisaProcess(struct student *s, char* newExpiry){
 
 void moveToNextStage(struct student *s){
     if (s == NULL || s->currentStage == NULL){
-        printf("Error: Student process has not initialized\n");
+        printf("Error: Visa process has not initialized\n");
         return;
     }
 
@@ -67,5 +71,45 @@ void moveToNextStage(struct student *s){
     }
     else{
         printf("PROCESS COMPLETE! %s has already reached the final stage %s", s->name, s->currentStage->stageName);
+    }
+}
+
+void init90DaysRoadmap(){
+    struct stageNode *n1 = (struct stageNode*)malloc(sizeof(struct stageNode));
+    struct stageNode *n2 = (struct stageNode*)malloc(sizeof(struct stageNode));
+    struct stageNode *n3 = (struct stageNode*)malloc(sizeof(struct stageNode));
+
+    strcpy(n1->stageName, "90-Day Notification Receipt");
+    strcpy(n1->stageName, "90-Day Document Verification");
+    strcpy(n1->stageName, "90-Day Report Completed");
+
+    n1->next = n2;
+    n2->next = n3;
+    n3->next = NULL;
+
+    headStage = n1;
+}
+
+void start90DaysProcess(struct student *s){
+    if (headStage == NULL){
+        init90DaysRoadmap();
+    }
+    if (s != NULL){
+        s->currentStage = headStage;
+        printf("Process Started: %s is now at [%s]\n", s->name, s->currentStage->stageName);
+    }
+}
+
+void move90DaysNextStage(struct student *s){
+    if (s == NULL || s->currentStage == NULL){
+        printf("Error: 90-Days process has not initialized\n");
+        return;
+    }
+
+    if (s->current90DaysStage != NULL){
+        s->current90DaysStage = s->current90DaysStage->next;
+        printf("90-DAY SUCCESS: %s moved to: %s\n", s->name, s->current90DaysStage->stageName);
+    } else{
+        printf("90-DAY COMPLETE: Final stage reached.\n");
     }
 }
