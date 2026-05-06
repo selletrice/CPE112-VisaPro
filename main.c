@@ -1,7 +1,7 @@
 #include "visa_pro.h"
 #include <stdio.h>
 
-void displayHeader() {
+void displayHeader(){
     printf("\n******************************************\n");
     printf("*              VISAPRO                   *\n");
     printf("*    VISA & 90-DAY TRACKING SYSTEM       *\n");
