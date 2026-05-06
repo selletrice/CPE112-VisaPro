@@ -1,4 +1,5 @@
-# VisaPro : International Student Visa + 90 Days Deadline & Document Support System
+# CPE112-VisaPro 
+## International Student Visa + 90 Days Deadline & Document Support System
 
 VisaPro is a specialized management system designed to assist international students at KMUTT with the complex process of visa extensions and 90-day reporting. By combining structured roadmaps with interactive document checklist, the system ensures students stay compliant with immigration regulations.
 
