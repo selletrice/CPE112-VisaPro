@@ -1,4 +1,4 @@
-# CPE112-VisaPro
+# VisaPro : International Student Visa + 90 Days Deadline & Document Support System
 
 VisaPro is a specialized management system designed to assist international students at KMUTT with the complex process of visa extensions and 90-day reporting. By combining structured roadmaps with interactive document checklist, the system ensures students stay compliant with immigration regulations.
 
@@ -23,6 +23,7 @@ For international students, administravtice processes like visa support letters 
 - ```├── document_logic.c:``` Implements the Binary Tree document checklists and Post-order logic.
 - ```├── deadline_manager.c:``` Manages expiry dates, Priority Queue sorting, and urgent student lists.
 - ```├── visa_pro.h:``` Global header containing structures for student, docNode, and stageNode.
+- ```├── Makefile```
 - ```└── README.md```
 
 ## How to Use
@@ -44,5 +45,5 @@ This project was developed by a team of first-year Computer Engineering students
 We consistently keep regular meetings. This helps us a lot in communicating with our team and in debugging. This project helped us with not just courses but to learn about importance of TEAMWORK.
 
 ## Acknowledgement
-* **Aj. Khine, Aj. Natasha & Aj. Naveed:** We would like to thank all of the professors for the opportunity to apply Data Structures and Algorithms to a real-world student administrative challenge.
-* **KMUTT Internation Affairs Office:** For the official documentation and checklists that formed the logic of this system.
+* **Professors: Dr. Aye Hninn Khine, Assoc. Prof. Dr. Natasha Dejdumrong & Mr. Naveed Sultan:** We would like to thank all of the professors for the opportunity to apply Data Structures and Algorithms to a real-world student administrative challenge.
+* **KMUTT International Affairs Office:** For the official documentation and checklists that formed the logic of this system.
