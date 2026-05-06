@@ -1,15 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+
 #ifndef VISA_PRO_H
 #define VISA_PRO_H
 
 #define MAX 100
-
-void displayHeader() {
-    printf("\n******************************************\n");
-    printf("*              VISAPRO                   *\n");
-    printf("*    VISA & 90-DAY TRACKING SYSTEM       *\n");
-    printf("*    Computer Engineering Project        *\n");
-    printf("******************************************\n");
-}
 
 // Node for Student Profile and Hashing
 struct stageNode{
@@ -44,14 +39,13 @@ struct student{
 };
 
 // Member 1: From student_db.c
-
-void displayHeader();
-
 void initTable();
 void insertStudent(long long id, char* name);
 struct student* searchStudent(long long id);
 
 // Member 1: From process_manager.c
+
+void displayHeader();
 
 // Visa 
 void initVisaRoadmap();
@@ -67,6 +61,8 @@ void move90DaysNextStage(struct student *s);
 //Member 2: From document_logic.c
 struct docNode *createDocumentNode(char document[]);
 struct docNode *docTree();
+struct docNode *docTree90();
+
 void documentChecklist(struct docNode *root);;
 int isTreeComplete(struct docNode *root);
 void clearDocumentTree(struct docNode *root);

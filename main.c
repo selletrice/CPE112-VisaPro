@@ -1,6 +1,14 @@
 #include "visa_pro.h"
 #include <stdio.h>
 
+void displayHeader() {
+    printf("\n******************************************\n");
+    printf("*              VISAPRO                   *\n");
+    printf("*    VISA & 90-DAY TRACKING SYSTEM       *\n");
+    printf("*    Computer Engineering Project        *\n");
+    printf("******************************************\n");
+}
+
 int main()
 {
     int choice;
@@ -106,7 +114,7 @@ int main()
                         if (isTreeComplete(s->doc90DaysTreeRoot))
                         {
                             printf("System: 90-Day Papers verified! Advancing...\n");
-                            move90DayNextStage(s);
+                            move90DaysNextStage(s);
                         }
                     }
                 }
