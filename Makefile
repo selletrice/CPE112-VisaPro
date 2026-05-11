@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g
-OBJ = main.o document_logic.o student_db.o process_manager.o
+OBJ = main.o document_logic.o student_db.o process_manager.o deadline_manager.o
 
 VisaPro: $(OBJ)
 	$(CC) $(OBJ) -o VisaPro
@@ -16,6 +16,9 @@ student_db.o: student_db.c visa_pro.h
 
 process_manager.o: process_manager.c visa_pro.h
 	$(CC) $(CFLAGS) -c process_manager.c
+
+deadline_manager.o: deadline_manager.c visa_pro.h
+	$(CC) $(CFLAGS) -c deadline_manager.c
 
 clean:
 	del /f /q *.o VisaPro.exe
