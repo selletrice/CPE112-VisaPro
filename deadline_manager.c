@@ -4,6 +4,66 @@
 #include <time.h>
 #include <stdlib.h>
 
+// Member 3 Task
+/**
+ * Structure representing a node in the Priority Queue.
+ * It stores a pointer to the student, the specific task description,
+ * and the calculated days remaining (which serves as the priority key).
+ */
+struct PriorityQueueNode {
+    struct student *studentData;
+    char taskName[50];
+    int daysRemaining;
+    struct PriorityQueueNode *next;
+};
+
+/**
+ * Global or local head pointer for the Priority Queue.
+ * Lower daysRemaining values have HIGHER priority (Min-Heap / Ascending Linked List behavior).
+ */
+struct PriorityQueueNode *pqHead = NULL;
+
+/**
+ * Inserts a task into the Priority Queue sorted by urgency (ascending order of days remaining).
+ */
+void enqueuePriority(struct student *s, const char *task, int days) {
+    struct PriorityQueueNode *newNode = (struct PriorityQueueNode *)malloc(sizeof(struct PriorityQueueNode));
+    if (newNode == NULL) return;
+
+    newNode->studentData = s;
+    strcpy(newNode->taskName, task);
+    newNode->daysRemaining = days;
+    newNode->next = NULL;
+
+    // Case 1: Queue is empty OR new node has higher urgency (fewer days remaining) than the head
+    if (pqHead == NULL || days < pqHead->daysRemaining) {
+        newNode->next = pqHead;
+        pqHead = newNode;
+    } else {
+        // Case 2: Traverse and insert at the correct position to maintain priority order
+        struct PriorityQueueNode *current = pqHead;
+        while (current->next != NULL && current->next->daysRemaining <= days) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+
+/**
+ * Optional Helper: Clears the queue memory after processing to prevent memory leaks.
+ */
+void freePriorityQueue() {
+    struct PriorityQueueNode *current = pqHead;
+    while (current != NULL) {
+        struct PriorityQueueNode *temp = current;
+        current = current->next;
+        free(temp);
+    }
+    pqHead = NULL;
+}
+// ============================================================================
+
 /**
  * Displays the application banner
  */
@@ -84,6 +144,14 @@ void checkDeadlinesAndProcess(struct student *s) {
     int vDays = getDaysRemaining(s->visaExpiry);
     int rDays = getDaysRemaining(s->report90DayDeadline);
 
+    // ------------------------------------------------------------------------
+    // ENQUEUEING INTO THE PRIORITY QUEUE
+    // Automatically dynamic sort tasks by urgency without affecting execution flow
+    // ------------------------------------------------------------------------
+    enqueuePriority(s, "Visa Extension", vDays);
+    enqueuePriority(s, "90-Day Report", rDays);
+    // ------------------------------------------------------------------------
+
     printf("\n--- DEADLINE ANALYSIS FOR %s ---\n", s->name);
 
     // Handle expired cases
@@ -92,7 +160,7 @@ void checkDeadlinesAndProcess(struct student *s) {
         if (rDays < 0) printf("[ERROR]: 90-Day Report is OVERDUE for %d days!\n", abs(rDays));
         printf("The system will now exit due to legal expiration status.\n");
         
-        // Return to main to allow for clean shutdown/data saving instead of a hard exit
+        freePriorityQueue(); // Clean up before exit
         return; 
     }
 
@@ -113,6 +181,7 @@ void checkDeadlinesAndProcess(struct student *s) {
     // Check if user is in the "Safe Zone"
     if (vDays > 30 && rDays > 15) {
         printf("\nYou are in the safe zone. No immediate action required.\n");
+        freePriorityQueue(); // Clean up queue memory
         return; 
     }
 
@@ -127,6 +196,7 @@ void checkDeadlinesAndProcess(struct student *s) {
     printf("Enter choice (1-3): ");
     if (scanf("%d", &choice) != 1) {
         while (getchar() != '\n'); // Clear invalid input buffer
+        freePriorityQueue();
         return;
     }
     getchar(); // Clear trailing newline from buffer
@@ -148,4 +218,6 @@ void checkDeadlinesAndProcess(struct student *s) {
             printf("Invalid selection.\n"); 
             break;
     }
+
+    freePriorityQueue(); // Clean up queue memory at the end of the process
 }
